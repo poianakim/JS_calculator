@@ -1,0 +1,21 @@
+#app{
+    width: 400px;
+  }
+  input {
+    margin: 2px;
+    padding: 20px;
+    font-size: 18px;
+    text-align: right;
+    border-style: none;
+    font-family: monospace;
+  }
+  #cal {
+    margin: 40px;
+  }
+  
+  #display {
+    width: 150px;
+    font-size: 19px;
+    padding:5px;
+  }
+  
