@@ -97,6 +97,14 @@ function Calculator() {
             onClick={evaluateValue} />
         </div>
       </div>
+      <div>
+        <footer>
+          ©"JS_calculator" {new Date().getFullYear()}
+          <br />
+          by <a href="https://github.com/poianakim/JS_calculator">POIANAKIM</a>
+
+        </footer>
+      </div>
     </div>
   )
 }
