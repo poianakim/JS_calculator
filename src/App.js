@@ -3,35 +3,36 @@ import React, { useState } from "react";
 function Calculator() {
   const [output, setOutput] = useState(0);
 
+  const displayNumbers = (event) => {
+    const { target: { value } } = event;
+    setOutput(value)
+  }
   const clearOutput = () => {
     setOutput(0);
   }
   const evaluateValue = () => {
-    const operatorReg = /(\+|-|\*|\/){2,}/
-    let formula 
-    if(output) {
-      formula = output
-    } else {
-      formula = ""
-    }
-    console.log('formula', formula)
-    const opers = formula.match(operatorReg)
-    console.log('opers', opers)
+    try {
+      const operatorReg = /(\+|-|\*|\/){2,}/
+      const formula = output
+      const opers = formula.match(operatorReg)
 
-    if (opers === null) {
-      setOutput(eval(formula))
-    } else {
-      if (opers[1] !== '-') {
-        const fixedFormula = formula.replace(opers[0], opers[1])
-        setOutput(eval(fixedFormula))
-      } else if (opers[1] === '-'
-        && opers[0].length < 3) {
+      if (opers === null) {
         setOutput(eval(formula))
       } else {
-        const excSubstract = formula.replace(opers[0], opers[0][opers.length - 1])
-        console.log(excSubstract, formula, opers[0][opers.length - 1])
-        setOutput(eval(excSubstract))
+        if (opers[1] !== '-') {
+          const fixedFormula = formula.replace(opers[0], opers[1])
+          setOutput(eval(fixedFormula))
+        } else if (opers[1] === '-'
+          && opers[0].length < 3) {
+          setOutput(eval(formula))
+        } else {
+          const excSubstract = formula.replace(opers[0], opers[0][opers.length - 1])
+          console.log(excSubstract, formula, opers[0][opers.length - 1])
+          setOutput(eval(excSubstract))
+        }
       }
+    } catch (err) {
+      console.log(err)
     }
   }
 
@@ -43,29 +44,29 @@ function Calculator() {
     // const Operatorwithsubtract = /[\+\*\/]-$/
     // const Operatorwithoutsubtract = /[\+\*\/]&/
     if (output === 0) {
-        if (e.target.value === zero.value) {
-            setOutput(0)
-        } else {
-            setOutput(e.target.value)
-        }
+      if (e.target.value === zero.value) {
+        setOutput(0)
+      } else {
+        setOutput(e.target.value)
+      }
     } else {
-        if (strNum[strNum.length - 1] === decimal.value
-            && e.target.value === decimal.value) {
-            setOutput(nums.value)
-        } else if (nums.value.match(/(\d*\.)/) !== null
-            && nums.value.match(/[+/*-]/) === null) {
-            decimal.value = null
-            setOutput(nums.value + e.target.value)
-        }
-        else {
-            setOutput(nums.value + e.target.value)
-        }
+      if (strNum[strNum.length - 1] === decimal.value
+        && e.target.value === decimal.value) {
+        setOutput(nums.value)
+      } else if (nums.value.match(/(\d*\.)/) !== null
+        && nums.value.match(/[+/*-]/) === null) {
+        decimal.value = null
+        setOutput(nums.value + e.target.value)
+      }
+      else {
+        setOutput(nums.value + e.target.value)
+      }
     }
-}
+  }
   return (
     <div id='cal'>
       <div className='row first-row'>
-        <input id='display' value={output} readOnly/>
+        <input id='display' value={output} onChange={displayNumbers} readOnly />
         <input id='clear' type='button' value='AC'
           onClick={clearOutput} />
       </div>
@@ -93,7 +94,7 @@ function Calculator() {
           <input type='button' value='0' onClick={inputNumber} id='zero' />
           <input type='button' value='.' onClick={inputNumber} id='decimal' />
           <input id='equals' type='button' value='='
-          onClick={evaluateValue} />
+            onClick={evaluateValue} />
         </div>
       </div>
     </div>

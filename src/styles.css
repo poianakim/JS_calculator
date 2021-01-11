@@ -9,13 +9,20 @@
     border-style: none;
     font-family: monospace;
   }
-  #cal {
-    margin: 40px;
-  }
   
+  #clear {
+    font-stretch: condensed;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
   #display {
     width: 150px;
     font-size: 19px;
     padding:5px;
   }
   
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
